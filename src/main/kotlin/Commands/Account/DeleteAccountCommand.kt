@@ -1,7 +1,6 @@
-package Commands.Impl
+package Commands.Account
 
 import Commands.Command
-import Config.BankConfig
 import Service.Bank
 
 class DeleteAccountCommand(

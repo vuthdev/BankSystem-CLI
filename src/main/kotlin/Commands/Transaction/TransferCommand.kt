@@ -1,8 +1,7 @@
-package Commands.Impl
+package Commands.Transaction
 
 import Commands.Command
 import Service.Bank
-import Util.BankValidator
 
 class TransferCommand(
     val bank: Bank,

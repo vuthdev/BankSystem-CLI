@@ -1,4 +1,4 @@
-package Commands.Impl
+package Commands.General
 
 import Commands.Command
 
@@ -29,6 +29,5 @@ class HelpCommand: Command {
         println("  list-transaction                           List all transactions")
 
         println("================================================================================")
-
     }
 }

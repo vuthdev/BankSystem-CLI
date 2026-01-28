@@ -1,18 +1,18 @@
-package Commands.Impl
+package Commands.User
 
 import Commands.Command
 import Service.Bank
 
-class ListTransactionsCommand(
+class ListUserCommand(
     val bank: Bank,
 ): Command {
-    override val name = "list-transaction"
+    override val name = "list-user"
     override fun execute(args: List<String>) {
         if (args.size > 1) {
-            println("Usage: list-transaction")
+            println("Usage: list-user")
             return
         }
 
-        bank.listTransactions()
+        bank.getAllUsers()
     }
 }

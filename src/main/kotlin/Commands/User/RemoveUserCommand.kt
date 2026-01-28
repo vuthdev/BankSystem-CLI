@@ -1,4 +1,4 @@
-package Commands.Impl
+package Commands.User
 
 import Commands.Command
 import Service.Bank
