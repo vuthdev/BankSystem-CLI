@@ -3,13 +3,13 @@ package Commands.Impl
 import Commands.Command
 import Service.Bank
 
-class AddAccountCommand(
+class CreateAccountCommand(
     val bank: Bank,
 ): Command {
-    override val name = "add-account"
+    override val name = "create-account"
     override fun execute(args : List<String>) {
         if (args.size != 1) {
-            println("Error: add-account <username>")
+            println("Error: create-account <username>")
             return
         }
 

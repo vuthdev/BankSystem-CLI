@@ -3,13 +3,13 @@ package Commands.Impl
 import Commands.Command
 import Service.Bank
 
-class ViewAccountCommand(
+class BalanceCommand(
     val bank: Bank,
 ): Command {
-    override val name = "view-account"
+    override val name = "balance"
     override fun execute(args: List<String>) {
         if (args.isEmpty()) {
-            println("Usage: view-account <account-number>")
+            println("Usage: balance <account-number>")
             return
         }
         if (args.size != 1) {

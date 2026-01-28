@@ -1,5 +1,5 @@
 import Commands.Command
-import Commands.Impl.AddAccountCommand
+import Commands.Impl.CreateAccountCommand
 import Commands.Impl.CreateUserCommand
 import Commands.Impl.DeleteAccountCommand
 import Commands.Impl.DepositCommand
@@ -9,7 +9,7 @@ import Commands.Impl.ListTransactionsCommand
 import Commands.Impl.ListUserCommand
 import Commands.Impl.RemoveUserCommand
 import Commands.Impl.TransferCommand
-import Commands.Impl.ViewAccountCommand
+import Commands.Impl.BalanceCommand
 import Commands.Impl.WithdrawCommand
 import Repository.AccountRepository
 import Repository.TransactionRepository
@@ -27,7 +27,7 @@ fun main() {
         HelpCommand(),
         CreateUserCommand(bank),
         RemoveUserCommand(bank),
-        AddAccountCommand(bank),
+        CreateAccountCommand(bank),
         DeleteAccountCommand(bank),
         ListUserCommand(bank),
         ListAccountCommand(bank),
@@ -35,7 +35,7 @@ fun main() {
         WithdrawCommand(bank),
         TransferCommand(bank),
         ListTransactionsCommand(bank),
-        ViewAccountCommand(bank)
+        BalanceCommand(bank)
     ).associateBy { it.name }
 
     println("Welcome to Bank CLI. Type 'help' for commands.")

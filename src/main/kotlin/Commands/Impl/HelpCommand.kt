@@ -13,14 +13,14 @@ class HelpCommand: Command {
 
         println("\n[ User Management ]")
         println("  create-user                                Create a new user")
-        println("  remove-user <username>                     Remove an existing user")
+        println("  delete-user <username>                     Remove an existing user")
         println("  list-user                                  List all users")
 
         println("\n[ Account Management ]")
-        println("  add-account <username>                     Add a new account for a user")
+        println("  create-account <username>                  Create a new bank account for a user")
         println("  delete-account <account-num>               Delete an account by number")
         println("  list-account <username>                    List all accounts for a user")
-        println("  view-account <account-num>                 View details of an account")
+        println("  balance <account-num>                      View balance of an account")
 
         println("\n[ Transactions ]")
         println("  deposit <account-num> <amt>                Deposit money into an account")
