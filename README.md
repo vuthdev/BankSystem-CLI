@@ -14,8 +14,6 @@ A command-line banking system built to practice backend fundamentals such as sys
 | `list-users`             | Show all users             |
 | `delete-user <username>` | Delete an existing user    |
 
----
-
 ### 💳 Account Commands
 
 | Command                               | Description                                 |
@@ -24,8 +22,6 @@ A command-line banking system built to practice backend fundamentals such as sys
 | `list-account <username>`             | Show all accounts of selected user          |
 | `delete-account <account-num>`        | Delete an account by number                 |
 | `balance <account-num>`               | Show current account balance                |
-
----
 
 ### 💸 Transaction Commands
 
