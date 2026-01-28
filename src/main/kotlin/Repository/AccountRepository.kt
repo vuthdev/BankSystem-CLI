@@ -4,6 +4,7 @@ import DB.Database
 import Model.Account
 import Model.Enums.Currency
 import Model.User
+import java.sql.Connection
 import java.util.UUID
 
 class AccountRepository {
@@ -12,10 +13,11 @@ class AccountRepository {
 
         Database.getConnection().use { conn ->
             conn.prepareStatement(sql).use { stmt ->
+                val cents = (account.balance * 100).toInt()
                 stmt.setObject(1, account.id)
                 stmt.setString(2, account.accountNumber)
                 stmt.setObject(3, account.ownerId)
-                stmt.setDouble(4, account.balance)
+                stmt.setInt(4, cents)
                 stmt.setString(5, account.currency.name)
                 stmt.executeUpdate()
             }
@@ -26,7 +28,8 @@ class AccountRepository {
         val sql = "UPDATE accounts SET balance = ? WHERE id = ?"
         Database.getConnection().use { conn ->
             conn.prepareStatement(sql).use { stmt ->
-                stmt.setDouble(1, balance)
+                val cents = (balance * 100).toInt()
+                stmt.setInt(1, cents)
                 stmt.setObject(2, account.id)
                 stmt.executeUpdate()
             }
@@ -45,7 +48,7 @@ class AccountRepository {
                         id = UUID.fromString(rs.getString("id")),
                         accountNumber = rs.getString("account_number"),
                         ownerId = UUID.fromString(rs.getString("owner_id")),
-                        balance = rs.getDouble("balance"),
+                        balance = rs.getInt("balance") / 100.0,
                         currency = Currency.valueOf(rs.getString("currency"))
                     )
                 } else null
@@ -66,7 +69,7 @@ class AccountRepository {
                             id = UUID.fromString(rs.getString("id")),
                             accountNumber = rs.getString("account_number"),
                             ownerId = UUID.fromString(rs.getString("owner_id")),
-                            balance = rs.getDouble("balance"),
+                            balance = rs.getInt("balance") / 100.0,
                             currency = Currency.valueOf(rs.getString("currency"))
                         )
                     )
@@ -97,7 +100,7 @@ class AccountRepository {
                 stmt.setString(1, username)
                 val rs = stmt.executeQuery()
                 return if (rs.next()) {
-                    rs.getDouble(1)
+                    rs.getInt(1) / 100.0
                 } else 0.0
             }
         }

@@ -1,6 +1,7 @@
 package Service
 
 import Config.BankConfig
+import DB.Database
 import Model.Account
 import Model.Enums.TransactionStatus
 import Model.Enums.TransactionType
@@ -37,7 +38,7 @@ class Bank(
             ownerId = newUser.id,
         )
         accountRepo.save(newAccount)
-        println("User ${newUser.username} created with a Account ${newAccount.id}")
+        println("User ${newUser.username} created with a Account ${newAccount.accountNumber}")
     }
 
     fun addAccount(username: String) {
@@ -110,7 +111,12 @@ class Bank(
         }
 
         if (amount < BankConfig.MIN_BALANCE) {
-            println("Error: Must deposit at lease 5 dollars")
+            println("Error: Must deposit at lease 5 USD")
+            return
+        }
+
+        if (amount > BankConfig.MAX_DEPOSIT_AMOUNT) {
+            println("Error: Cannot deposit more than 10000.0 USD")
             return
         }
 
@@ -164,6 +170,7 @@ class Bank(
             status = TransactionStatus.CONFIRMED,
         )
         transactionRepo.save(newTransaction)
+
         printTransactions(newTransaction)
     }
 
@@ -205,6 +212,7 @@ class Bank(
             status = TransactionStatus.CONFIRMED,
         )
         transactionRepo.save(newTransaction)
+
         printTransactions(newTransaction)
     }
 

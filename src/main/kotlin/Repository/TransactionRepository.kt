@@ -5,6 +5,7 @@ import Model.Enums.Currency
 import Model.Enums.TransactionStatus
 import Model.Enums.TransactionType
 import Model.Transaction
+import java.sql.Connection
 import java.util.UUID
 
 class TransactionRepository {
@@ -17,10 +18,11 @@ class TransactionRepository {
 
         Database.getConnection().use { conn ->
             conn.prepareStatement(sql).use { ps ->
+                val cents = (transaction.amount * 100).toInt()
                 ps.setObject(1, transaction.id)
                 ps.setString(2, transaction.sender)
                 ps.setString(3, transaction.receiver)
-                ps.setDouble(4, transaction.amount)
+                ps.setInt(4, cents)
                 ps.setString(5, transaction.currency.name)
                 ps.setString(6, transaction.type.name)
                 ps.setString(7, transaction.status.name)
@@ -42,7 +44,7 @@ class TransactionRepository {
                             id = UUID.fromString(rs.getString("id")),
                             sender = rs.getString("sender_account"),
                             receiver = rs.getString("receiver_account"),
-                            amount = rs.getDouble("amount"),
+                            amount = rs.getInt("amount") / 100.0,
                             currency = Currency.valueOf(rs.getString("currency")),
                             type = TransactionType.valueOf(rs.getString("type")),
                             status = TransactionStatus.valueOf(rs.getString("status")),
