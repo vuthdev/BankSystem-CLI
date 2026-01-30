@@ -6,19 +6,26 @@ import Service.Bank
 class RemoveUserCommand(
     val bank: Bank,
 ): Command {
-    override val name = "remove-user"
+    override val name = "delete-user"
     override fun execute(args: List<String>) {
         if (args.isEmpty()) {
-            println("Error: remove-user <username>")
+            println("Error: delete-user <username>")
             return
         }
 
         if (args.size != 1) {
-            println("Error: remove-user <username>")
+            println("Error: delete-user <username>")
             return
         }
 
         val username = args[0].lowercase()
-        bank.removeUser(username)
+
+        print("Are you sure you want to delete this account? (y/n): ")
+        val isDelete = readln()
+        if (isDelete == "y" || isDelete == "yes") {
+            bank.removeUser(username)
+        } else {
+            return
+        }
     }
 }
